@@ -144,19 +144,22 @@ public class SlotBehaviour : MonoBehaviour
   bool IsTurboOn;
   bool StopSpinToggle;
   internal bool WasAutoSpinOn;
-
-
   internal bool CheckPopups = false;
   internal int BetCounter = 0;
-
   static private int Lines = 20;
   private double currentBalance = 0;
   private double currentTotalBet = 0;
   private float SpinDelay = 0.2f;
+  [SerializeField] Sprite[] TurboToggleSprites;
 
-  [SerializeField]
-  Sprite[] TurboToggleSprites;
-
+  public static List<List<int>> initialGrid = new List<List<int>>()
+    {
+        new List<int>() { 9, 1, 2},
+        new List<int>() { 1, 9, 2},
+        new List<int>() { 9, 8, 8},
+        new List<int>() { 2, 9, 1},
+        new List<int>() { 2, 9, 1}
+    };
 
   private void Start()
   {
@@ -785,8 +788,13 @@ public class SlotBehaviour : MonoBehaviour
     {
       for (int j = 0; j < 3; j++)
       {
-        int randomIndex = UnityEngine.Random.Range(0, myImages.Length);
-        Tempimages[i].slotImages[j].sprite = myImages[randomIndex];
+        // int randomIndex = UnityEngine.Random.Range(0, myImages.Length);
+        int index = initialGrid[i][j];
+        Tempimages[i].slotImages[j].sprite = myImages[index];
+        ImageAnimation anim = Tempimages[i].slotImages[j].GetComponent<ImageAnimation>();
+        PopulateAnimationSprites(anim, index);
+        TempList.Add(anim);
+        anim.StartAnimation();
       }
     }
   }
