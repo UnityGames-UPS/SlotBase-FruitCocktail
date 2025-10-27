@@ -222,7 +222,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("PressedDisable");
         megawin_TweenOne?.Kill();
         megawin_TweenTwo?.Kill();
-        MainPopup_Object.SetActive(false);
+        // MainPopup_Object.SetActive(false);
+        WinningPopup_Object.SetActive(false);
         megaWIn.SetActive(false);
         //slotManager.CheckBonusGame();                             /change it here ashu
 

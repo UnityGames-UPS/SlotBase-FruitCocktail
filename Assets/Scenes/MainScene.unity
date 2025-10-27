@@ -7502,7 +7502,7 @@ MonoBehaviour:
   WinningPopup_Object: {fileID: 900637985}
   AboutPopup_Object: {fileID: 0}
   AboutExit_Button: {fileID: 0}
-  megaWin_Disable: {fileID: 147296789}
+  megaWin_Disable: {fileID: 1374721086}
   PaytablePopup_Object: {fileID: 1023456358}
   Left_Arrow: {fileID: 691714915}
   Right_Arrow: {fileID: 248008048}
