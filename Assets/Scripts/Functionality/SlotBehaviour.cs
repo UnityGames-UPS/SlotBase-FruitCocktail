@@ -667,7 +667,7 @@ public class SlotBehaviour : MonoBehaviour
     if (IsTurboOn || IsFreeSpin)
     {
       StopSpinToggle = true;
-      yield return new WaitForSeconds(0.1f);
+      // yield return new WaitForSeconds(0.1f);
     }
     else
     {
