@@ -165,7 +165,8 @@ public class SlotBehaviour : MonoBehaviour
   {
     IsAutoSpin = false;
     if (SlotStart_Button) SlotStart_Button.onClick.RemoveAllListeners();
-    if (SlotStart_Button) SlotStart_Button.onClick.AddListener(delegate { StartSlots(); m_GameManager.m_AudioController.m_Spin_Button_Clicked.Play(); });
+    if (SlotStart_Button) SlotStart_Button.onClick.AddListener(delegate { StartSlots(); });
+    // if (SlotStart_Button) SlotStart_Button.onClick.AddListener(delegate { StartSlots(); m_GameManager.m_AudioController.m_Spin_Button_Clicked.Play(); });
 
     if (BetPlus_Button) BetPlus_Button.onClick.RemoveAllListeners();
     if (BetPlus_Button) BetPlus_Button.onClick.AddListener(delegate { ChangeBet(true); m_GameManager.m_AudioController.m_Click_Audio.Play(); });
@@ -305,6 +306,7 @@ public class SlotBehaviour : MonoBehaviour
     if (AutoSpinStop_Button) AutoSpinStop_Button.gameObject.SetActive(false);
     if (AutoSpin_Button) AutoSpin_Button.gameObject.SetActive(true);
     StartCoroutine(StopAutoSpinCoroutine());
+    m_GameManager.m_AudioController.m_Spin_Audio.Stop();
 
 
   }
@@ -561,8 +563,10 @@ public class SlotBehaviour : MonoBehaviour
   private void StartSlots(bool autoSpin = false)
   {
     TotalWin_text.text = 0.ToString("f3");
-    if (audioController.m_Player_Listener.enabled) audioController.m_Spin_Audio.Play();
-
+    if (currentBalance > currentTotalBet)
+    {
+      if (audioController.m_Player_Listener.enabled) audioController.m_Spin_Audio.Play();
+    }
     if (!autoSpin)
     {
       if (AutoSpinRoutine != null)
