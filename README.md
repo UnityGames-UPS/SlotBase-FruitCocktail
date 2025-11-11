@@ -1,2 +1,2 @@
-# SlotBase-FruitCocktail
+# Fruit Cocktail
 Dev Branch
