@@ -781,6 +781,13 @@ public class SlotBehaviour : MonoBehaviour
 
   }
 
+  internal void UpdateBalanceDisplay(double newBalance)
+  {
+    currentBalance = newBalance;
+    if (Balance_text) Balance_text.text = newBalance.ToString("f3");
+    CompareBalance();
+  }
+
   internal void CallCloseSocket()
   {
     StartCoroutine(SocketManager.CloseSocket());

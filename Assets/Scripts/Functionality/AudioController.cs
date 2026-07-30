@@ -21,8 +21,9 @@ public class AudioController : MonoBehaviour
     [SerializeField] internal Slider m_SoundSlider;
     [SerializeField] internal Slider m_MusicSlider;
 
-    private event Action m_On_Application_Focus;
-    private event Action m_On_Application_Out_Of_Focus;
+    private List<AudioSource> allSources;
+    private readonly Dictionary<AudioSource, bool> preFocusMuteState = new Dictionary<AudioSource, bool>();
+    private bool isForceMuted = false;
 
     private void Start()
     {
@@ -59,43 +60,39 @@ public class AudioController : MonoBehaviour
     internal void InitialAudioSetup()
     {
         if (m_BG_Audio) m_BG_Audio.Play();
+    }
 
-        m_On_Application_Focus += delegate
-        {
-            m_Player_Listener.enabled = true;
-            if (m_BG_Audio) m_BG_Audio.UnPause();
-            if (m_Click_Audio) m_Click_Audio.UnPause();
-            if (m_Win_Audio) m_Win_Audio.UnPause();
-            if (m_LooseAudio) m_LooseAudio.UnPause();
-            if (m_Bonus_Audio) m_Bonus_Audio.UnPause();
-            if (m_FreeSpin_Audio) m_FreeSpin_Audio.UnPause();
-            if (m_Spin_Audio) m_Spin_Audio.UnPause();
-        };
+    internal void SetMuteAll(bool forceMute)
+    {
+        if (forceMute == isForceMuted) return;
+        isForceMuted = forceMute;
 
-        m_On_Application_Out_Of_Focus += delegate
+        if (allSources == null)
         {
-            m_Player_Listener.enabled = false;
-            if (m_BG_Audio) m_BG_Audio.Pause();
-            if (m_Click_Audio) m_Click_Audio.Pause();
-            if (m_Win_Audio) m_Win_Audio.Pause();
-            if (m_LooseAudio) m_LooseAudio.Pause();
-            if (m_Bonus_Audio) m_Bonus_Audio.Pause();
-            if (m_FreeSpin_Audio) m_FreeSpin_Audio.Pause();
-            if (m_Spin_Audio) m_Spin_Audio.Pause();
-        };
+            allSources = new List<AudioSource> {
+                m_BG_Audio, m_Bonus_BG_Audio, m_Click_Audio, m_Win_Audio, m_LooseAudio,
+                m_Bonus_Audio, m_FreeSpin_Audio, m_Spin_Audio, m_Bonus_Spin_Audio, m_Spin_Button_Clicked
+            };
+        }
+
+        foreach (var source in allSources)
+        {
+            if (source == null) continue;
+            if (forceMute)
+            {
+                preFocusMuteState[source] = source.mute;
+                source.mute = true;
+            }
+            else
+            {
+                source.mute = preFocusMuteState.TryGetValue(source, out bool prevMuted) ? prevMuted : source.mute;
+            }
+        }
     }
 
     private void OnApplicationFocus(bool focus)
     {
-        //if (!focus)
-        //{
-        //    m_Player_Listener.enabled = false;
-        //}
-        //else
-        //{
-        //    m_Player_Listener.enabled = true;
-
-        //}
+        SetMuteAll(!focus);
     }
 
     internal void ToggleMute(bool toggle, string type = "all")

@@ -125,6 +125,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] Popups;
 
 
+    private void Awake()
+    {
+        if (socketManager != null && socketManager.JSManager != null)
+            socketManager.JSManager.RegisterVisibilityListener(gameObject.name);
+    }
+
+    public void OnFocusChanged(string value)
+    {
+        bool focused = value == "1";
+        Debug.Log("UNITY FOCUS CHANGED: " + value + " (focused: " + focused + ")");
+        audioController?.SetMuteAll(!focused);
+        socketManager?.HandleFocusChange(focused);
+    }
+
     private void Start()
     {
         if (CloseAD_Button) CloseAD_Button.onClick.RemoveAllListeners();
