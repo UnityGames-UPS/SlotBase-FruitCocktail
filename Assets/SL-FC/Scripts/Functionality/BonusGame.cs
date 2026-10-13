@@ -86,11 +86,11 @@ public class BonusGame : MonoBehaviour
     [SerializeField] private List<OuterReelItem> m_Exit;
 
     [SerializeField] private GameObject m_StopGameobject;
-    [SerializeField] internal GameObject m_BonusWonPopup;
+    [SerializeField] private GameObject m_BonusWonPopup;
 
 
     private bool ison = true;
-    public List<int> resultnum = new List<int>();
+    [SerializeField] private List<int> resultnum = new List<int>();
     private int Lives = 0;
     private int N_SpinCount_Begin = 0;
     private int N_SpinCount = 0;

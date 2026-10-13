@@ -27,7 +27,7 @@ public class SocketIOManager : MonoBehaviour
   //WebSocket currentSocket = null;
   internal bool isResultdone = false;
   private SocketManager manager;
-  [SerializeField] internal UIManager uiManager;
+  [SerializeField] private UIManager uiManager;
   //HACK: Socket URI
   protected string TestSocketURI = "https://devrealtime.dingdinghouse.com/";
   protected string SocketURI = null;
@@ -39,8 +39,8 @@ public class SocketIOManager : MonoBehaviour
   private string TestToken;
   protected string gameID = "SL-FC";
 
-  internal bool isLoaded = false;
-  internal bool SetInit = false;
+  private bool isLoaded = false;
+  private bool SetInit = false;
   private const int maxReconnectionAttempts = 6;
   private readonly TimeSpan reconnectionDelay = TimeSpan.FromSeconds(10);
 
@@ -618,7 +618,7 @@ public class GameData
   public List<int> spinBonus { get; set; }
 }
 
-public class BonusResult
+internal class BonusResult
 {
   public List<List<int>> innerMatrix { get; set; }
   public List<int> outerRingSymbol { get; set; }

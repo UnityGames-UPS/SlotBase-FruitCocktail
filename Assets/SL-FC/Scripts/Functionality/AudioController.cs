@@ -13,13 +13,13 @@ public class AudioController : MonoBehaviour
     [SerializeField] internal AudioSource m_Win_Audio;
     [SerializeField] internal AudioSource m_LooseAudio;
     [SerializeField] internal AudioSource m_Bonus_Audio;
-    [SerializeField] internal AudioSource m_FreeSpin_Audio;
+    [SerializeField] private AudioSource m_FreeSpin_Audio;
     [SerializeField] internal AudioSource m_Spin_Audio;
-    [SerializeField] internal AudioSource m_Bonus_Spin_Audio;
+    [SerializeField] private AudioSource m_Bonus_Spin_Audio;
     [SerializeField] internal AudioSource m_Spin_Button_Clicked;
 
-    [SerializeField] internal Slider m_SoundSlider;
-    [SerializeField] internal Slider m_MusicSlider;
+    [SerializeField] private Slider m_SoundSlider;
+    [SerializeField] private Slider m_MusicSlider;
 
     private List<AudioSource> allSources;
     private readonly Dictionary<AudioSource, bool> preFocusMuteState = new Dictionary<AudioSource, bool>();
@@ -57,7 +57,7 @@ public class AudioController : MonoBehaviour
         m_Bonus_BG_Audio.volume = value;
     }
 
-    internal void InitialAudioSetup()
+    private void InitialAudioSetup()
     {
         if (m_BG_Audio) m_BG_Audio.Play();
     }

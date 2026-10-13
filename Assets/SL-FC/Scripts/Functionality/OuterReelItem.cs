@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class OuterReelItem : MonoBehaviour
 {
-    [SerializeField] internal int id;
-    [SerializeField] internal bool isExit;
+    [SerializeField] private int id;
+    [SerializeField] private bool isExit;
     [SerializeField] internal GameObject selector;
     [SerializeField] internal Image image;
 

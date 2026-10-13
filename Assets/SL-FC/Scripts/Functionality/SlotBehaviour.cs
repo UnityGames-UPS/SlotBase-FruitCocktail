@@ -64,17 +64,17 @@ public class SlotBehaviour : MonoBehaviour
   //[SerializeField]
   //private Sprite[] Bonus_Sprite;
   [SerializeField]
-  internal Sprite[] Apple_sprite;
+  private Sprite[] Apple_sprite;
   [SerializeField]
   internal Sprite[] Cherry_Sprite;
   [SerializeField]
   internal Sprite[] Coconut_Sprite;
   [SerializeField]
-  internal Sprite[] Jelly_Sprite;
+  private Sprite[] Jelly_Sprite;
   [SerializeField]
   internal Sprite[] Juice_Sprite;
   [SerializeField]
-  internal Sprite[] Lemon_Sprite;
+  private Sprite[] Lemon_Sprite;
   [SerializeField]
   internal Sprite[] Orange_Sprite;
   [SerializeField]
@@ -82,11 +82,11 @@ public class SlotBehaviour : MonoBehaviour
   [SerializeField]
   internal Sprite[] Pineapple_Sprite;
   [SerializeField]
-  internal Sprite[] Strawberry_Sprite;
+  private Sprite[] Strawberry_Sprite;
   [SerializeField]
   internal Sprite[] Watermelon_Sprite;
   [SerializeField]
-  internal Sprite[] Wild_Sprite;
+  private Sprite[] Wild_Sprite;
 
 
   [Header("Miscellaneous UI")]
@@ -145,14 +145,14 @@ public class SlotBehaviour : MonoBehaviour
   bool StopSpinToggle;
   internal bool WasAutoSpinOn;
   internal bool CheckPopups = false;
-  internal int BetCounter = 0;
+  private int BetCounter = 0;
   static private int Lines = 20;
   private double currentBalance = 0;
   private double currentTotalBet = 0;
   private float SpinDelay = 0.2f;
   [SerializeField] Sprite[] TurboToggleSprites;
 
-  public static List<List<int>> initialGrid = new List<List<int>>()
+  private static List<List<int>> initialGrid = new List<List<int>>()
     {
         new List<int>() { 9, 1, 2},
         new List<int>() { 1, 9, 2},
@@ -464,7 +464,7 @@ public class SlotBehaviour : MonoBehaviour
   }
 
   //reset the layout after populating the slots
-  internal void LayoutReset(int number)
+  private void LayoutReset(int number)
   {
     Debug.Log("layout_Reset");
     if (Slot_Elements[number]) Slot_Elements[number].ignoreLayout = true;
@@ -852,7 +852,7 @@ public class SlotBehaviour : MonoBehaviour
   }
 
 
-  internal void startbonusautomatically()
+  private void startbonusautomatically()
   {
     bonusManager.StartBonusGame();
   }

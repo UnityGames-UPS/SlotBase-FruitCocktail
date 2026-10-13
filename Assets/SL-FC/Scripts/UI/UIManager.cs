@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     internal GameObject MainPopup_Object;
     [SerializeField]
-    internal GameObject WinningPopup_Object;
+    private GameObject WinningPopup_Object;
 
     [Header("About Popup")]
     [SerializeField]
@@ -93,7 +93,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private AudioController audioController;
     [SerializeField] private SlotBehaviour slotManager;
     private int FreeSpins;
-    public int currentSpin;
+    [SerializeField] internal int currentSpin;
     [SerializeField] private TMP_Text freeSpintext;
     [SerializeField] private Image freeSpinSlider;
     [Header("Game Manager Reference")]
@@ -219,7 +219,7 @@ public class UIManager : MonoBehaviour
         StartScatterwinAnim(winAmount);
     }
 
-    internal void StartFreeSpins(int spins)
+    private void StartFreeSpins(int spins)
     {
 
         FreeSpins = spins;
@@ -243,7 +243,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    internal void disableMwinPopupReset()
+    private void disableMwinPopupReset()
     {
         slotManager.CheckPopups = false;
         if (slotManager.WasAutoSpinOn && !slotManager.SocketManager.ResultData.bonus.isTriggered)
@@ -423,7 +423,7 @@ public class UIManager : MonoBehaviour
         if (WinningPopup_Object) WinningPopup_Object.SetActive(true);
     }
 
-    internal void ClosePopup(GameObject Popup)
+    private void ClosePopup(GameObject Popup)
     {
         if (audioController.m_Player_Listener.enabled) audioController.m_Click_Audio.Play();
         if (Popup) Popup.SetActive(false);
